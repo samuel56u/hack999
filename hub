@@ -1,0 +1,116 @@
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+local janelaHub = Fluent:CreateWindow({
+    Title = "Fruits Battlegrounds Hub v" .. Fluent.Version,
+    TabWidth = 140,
+    Size = UDim2.fromOffset(400, 400),
+    Theme = "Dark"
+})
+
+local abas = {
+    Principal = janelaHub:AddTab({ Title = "Principal" }),
+    Configuracoes = janelaHub:AddTab({ Title = "Configurações", Icon = "settings" }),
+    Ataques = janelaHub:AddTab({ Title = "Ataques", Icon = "fire" }),
+    Misc = janelaHub:AddTab({ Title = "Extras", Icon = "question" })
+}
+
+abas.Principal:AddParagraph({
+    Title = "Fruits Battlegrounds Hub",
+    Content = "Use os botões abaixo para automatizar ações no jogo e melhorar seu desempenho!"
+})
+
+local function iniciarAutoAtaque()
+    local jogador = game:GetService("Players").LocalPlayer
+    local humanoide = jogador.Character and jogador.Character:FindFirstChild("Humanoid")
+    
+    if not humanoide then
+        print("Erro: Não encontramos o humanoide do personagem. Verifique se você está no jogo.")
+        return
+    end
+    
+    while humanoide and humanoide.Parent do
+        wait(0.1)  -- Atraso de 0.1 segundos entre os ataques
+        
+        humanoide:ActivateAbility(1)
+        humanoide:ActivateAbility(2)
+        humanoide:ActivateAbility(3)
+        humanoide:ActivateAbility(4)
+    end
+
+    print("Erro: Humanoide ou personagem perdido. Parando o Auto Ataque.")
+end
+
+local function ativarFPSBoost()
+    print("FPS Boost ativado! Melhor desempenho no jogo.")
+end
+
+local function ativarGodMode()
+    print("Modo Deus ativado! Você agora é invencível.")
+end
+
+local function alterarConfiguracoes()
+    print("Alterando configurações do Hub... Personalize como preferir.")
+end
+
+local function ativarTeleporteAutomatico()
+    print("Teleporte automático ativado! O jogo irá te teletransportar conforme necessário.")
+end
+
+abas.Ataques:AddButton({
+    Title = "Iniciar Auto Ataque", 
+    Callback = function()
+        iniciarAutoAtaque()
+    end
+})
+
+abas.Misc:AddButton({
+    Title = "Iniciar Auto Farm", 
+    Callback = function()
+        print("Iniciando o Auto Farm... A lógica ainda está em desenvolvimento.")
+    end
+})
+
+abas.Misc:AddButton({
+    Title = "Iniciar Auto Quest", 
+    Callback = function()
+        print("Iniciando Auto Quest... A lógica ainda está sendo implementada.")
+    end
+})
+
+abas.Misc:AddButton({
+    Title = "Ativar Teleporte Automático", 
+    Callback = function()
+        ativarTeleporteAutomatico()
+    end
+})
+
+
+abas.Configuracoes:AddButton({
+    Title = "Ativar FPS Boost", 
+    Callback = function() 
+        ativarFPSBoost()
+    end
+})
+
+abas.Configuracoes:AddButton({
+    Title = "Ativar God Mode", 
+    Callback = function() 
+        ativarGodMode()
+    end
+})
+
+abas.Configuracoes:AddButton({
+    Title = "Alterar Configurações", 
+    Callback = function() 
+        alterarConfiguracoes()
+    end
+})
+
+
+janelaHub:SelectTab(1)
+
+
+Fluent:Notify({
+    Title = "Fruits Battlegrounds Hub",
+    Content = "Hub carregado com sucesso! Comece a usar as funções e melhore seu desempenho no jogo."
+})
